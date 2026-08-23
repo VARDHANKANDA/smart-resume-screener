@@ -1,0 +1,28 @@
+Aarav Sharma
+Email: aarav.sharma.dev@example.com | Phone: +91-98765-43210 | Bengaluru, Karnataka
+GitHub: github.com/aaravsharma | LinkedIn: linkedin.com/in/aarav-sharma-tech
+
+PROFESSIONAL SUMMARY
+Results-driven Senior Backend Engineer with 5+ years of experience architecting and scaling distributed cloud microservices and high-throughput REST APIs using Python, FastAPI, PostgreSQL, Redis, and Docker.
+
+TECHNICAL SKILLS
+- Programming Languages: Python, SQL, Bash
+- Frameworks & APIs: FastAPI, Flask, REST APIs, GraphQL
+- Databases & Caching: PostgreSQL, Redis, SQLAlchemy
+- Cloud & DevOps: Docker, Kubernetes, AWS, CI/CD, GitHub Actions, Linux
+- Testing & Tools: Pytest, Git, Agile, Postman, Celery
+
+WORK EXPERIENCE
+Senior Backend Developer | RazorScale Technologies, Bengaluru | 2022 - Present
+- Architected high-performance REST APIs and asynchronous task processing using FastAPI and Celery handling 2M+ daily requests.
+- Optimized database query latency by 45% using PostgreSQL indexing and Redis distributed caching.
+- Containerized microservices with Docker and deployed on AWS Kubernetes (EKS) via CI/CD pipelines.
+
+Backend Software Engineer | Swiftdrive Labs, Hyderabad | 2019 - 2022
+- Developed core cloud backend services using Python, FastAPI, and PostgreSQL.
+- Implemented automated test suites with Pytest achieving 94% test coverage.
+- Participated in Agile sprint planning and architected resilient cloud integrations.
+
+EDUCATION
+Bachelor of Technology in Computer Science and Engineering
+Indian Institute of Technology (IIT) | 2015 - 2019

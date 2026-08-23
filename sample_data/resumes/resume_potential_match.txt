@@ -1,0 +1,26 @@
+Priya Patel
+Email: priya.patel.tech@example.com | Phone: +91-98234-56789 | Pune, Maharashtra
+GitHub: github.com/priyapatel | Portfolio: priyapatel.dev
+
+PROFESSIONAL SUMMARY
+Dynamic and creative Full Stack Web Developer with 3+ years of experience building responsive web applications using JavaScript, React, HTML5, CSS3, and Node.js. Hands-on experience with Python scripting, REST APIs, and SQL databases.
+
+TECHNICAL SKILLS
+- Frontend: JavaScript, TypeScript, React, HTML, CSS, TailwindCSS, Bootstrap
+- Backend & Languages: Node.js, Express, Python, SQL
+- Databases & Tools: MongoDB, PostgreSQL, Git, GitHub, Postman, Webpack, Vite
+- Methodologies: Agile, Scrum, UI/UX Design
+
+WORK EXPERIENCE
+Full Stack Developer | NexGen Digital Systems, Pune | 2022 - Present
+- Built modern user interfaces and management dashboards using React, TailwindCSS, and JavaScript.
+- Integrated REST APIs with backend services and optimized client-side rendering speed by 35%.
+- Wrote automated UI and component unit tests using Jest and React Testing Library.
+
+Junior Web Developer | TechVibe Media, Mumbai | 2021 - 2022
+- Developed customer portal features using Node.js, Python, and SQL.
+- Assisted with database schema design and database migration scripts.
+
+EDUCATION
+Bachelor of Engineering in Information Technology
+Pune Institute of Computer Technology (PICT) | 2017 - 2021

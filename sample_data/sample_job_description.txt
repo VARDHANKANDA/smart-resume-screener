@@ -1,0 +1,25 @@
+Job Title: Senior Backend Engineer (Python / FastAPI)
+
+Company: ApexCloud Innovations
+Location: Remote / Hybrid
+
+About the Role:
+We are looking for a Senior Backend Engineer to architect, build, and scale our high-throughput cloud microservices and data processing pipelines. You will lead API development, collaborate with cross-functional teams, and ensure robust database design and system reliability.
+
+Key Responsibilities:
+- Design and develop high-performance REST APIs and microservices using Python and FastAPI.
+- Build resilient database models and queries with PostgreSQL, SQLAlchemy, and Redis caching.
+- Deploy, maintain, and monitor containerized workloads using Docker and Kubernetes.
+- Implement automated testing with Pytest and maintain CI/CD pipelines using GitHub Actions.
+- Optimize system architecture for low latency and high availability.
+
+Requirements:
+- 4+ years of professional backend software development experience.
+- Strong proficiency in Python, FastAPI, and asynchronous programming.
+- Deep experience with relational databases (PostgreSQL, SQL) and caching (Redis).
+- Hands-on expertise with Docker, containerization, and REST APIs.
+- Bachelor's or Master's degree in Computer Science, Information Technology, or equivalent practical experience.
+
+Preferred / Nice to Have:
+- Experience with Kubernetes, AWS, CI/CD, and Kafka messaging.
+- Familiarity with Pytest, unit testing, and Agile/Scrum methodologies.

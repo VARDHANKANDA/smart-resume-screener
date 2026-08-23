@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Resume Screener | Multi-User AI Recruitment Platform</title>
+  <meta name="description" content="Multi-user SaaS platform for intelligent resume screening, bulk parsing, candidate pool management, and calibrated semantic ranking." />
+  
+  <!-- Google Font: Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body class="saas-body">
+  <!-- Atmospheric Glow Accents -->
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+  <div class="bg-glow bg-glow-3"></div>
+
+  <!-- ================= AUTHENTICATION VIEW ================= -->
+  <div id="auth-container" class="auth-wrapper" style="display: none;">
+    <div class="auth-card">
+      <div class="auth-header">
+        <div class="brand-logo-wrap">
+          <div class="brand-icon">
+            <svg width="26" height="26" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 3L27 9.35V22.65L16 29L5 22.65V9.35L16 3Z" stroke="#00FF88" stroke-width="2.2" stroke-linejoin="round"/>
+              <path d="M16 10V22" stroke="#00FF88" stroke-width="2.2" stroke-linecap="round"/>
+              <path d="M10 13L22 19" stroke="#00FF88" stroke-width="2" stroke-linecap="round"/>
+              <path d="M22 13L10 19" stroke="#00FF88" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="16" cy="16" r="3.5" fill="#00FF88"/>
+            </svg>
+          </div>
+          <div class="brand-title"><span>SMART</span><strong>RESUME</strong></div>
+        </div>
+        <h2 class="auth-title" id="auth-main-title">Welcome back</h2>
+        <p class="auth-subtitle" id="auth-sub-title">Sign in to manage your company candidate pool and screen resumes.</p>
+      </div>
+
+      <!-- Auth Form Tabs -->
+      <div class="auth-tab-switch">
+        <button type="button" class="auth-tab-btn active" id="tab-login-btn">Sign In</button>
+        <button type="button" class="auth-tab-btn" id="tab-register-btn">Create Account</button>
+      </div>
+
+      <!-- Login Form -->
+      <form id="form-login" class="auth-form">
+        <div class="form-group">
+          <label for="login-email">Work Email</label>
+          <div class="input-icon-wrap">
+            <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            <input type="email" id="login-email" class="form-input" placeholder="recruiter@company.com" required autocomplete="email" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="login-password">Password</label>
+          <div class="input-icon-wrap">
+            <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            <input type="password" id="login-password" class="form-input" placeholder="••••••••" required autocomplete="current-password" />
+            <button type="button" class="btn-toggle-pwd" data-target="login-password" aria-label="Toggle password visibility">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="auth-error-msg" id="login-error-msg"></div>
+
+        <button type="submit" class="btn btn-primary btn-block btn-lg mt-3" id="btn-submit-login">
+          <span>Sign In</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+      </form>
+
+      <!-- Register Form -->
+      <form id="form-register" class="auth-form" style="display: none;">
+        <div class="form-group">
+          <label for="reg-fullname">Full Name</label>
+          <div class="input-icon-wrap">
+            <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <input type="text" id="reg-fullname" class="form-input" placeholder="e.g. Vikramaditya Singh" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="reg-email">Work Email</label>
+          <div class="input-icon-wrap">
+            <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            <input type="email" id="reg-email" class="form-input" placeholder="vikram@enterprise.com" required autocomplete="email" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="reg-role">Role / Job Title (Optional)</label>
+          <div class="input-icon-wrap">
+            <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+            </svg>
+            <input type="text" id="reg-role" class="form-input" placeholder="e.g. Lead Talent Partner" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="reg-password">Password (min. 6 characters)</label>
+          <div class="input-icon-wrap">
+            <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            <input type="password" id="reg-password" class="form-input" placeholder="••••••••" required minlength="6" autocomplete="new-password" />
+            <button type="button" class="btn-toggle-pwd" data-target="reg-password" aria-label="Toggle password visibility">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="reg-confirm-password">Confirm Password</label>
+          <div class="input-icon-wrap">
+            <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            <input type="password" id="reg-confirm-password" class="form-input" placeholder="••••••••" required minlength="6" autocomplete="new-password" />
+            <button type="button" class="btn-toggle-pwd" data-target="reg-confirm-password" aria-label="Toggle password visibility">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="auth-error-msg" id="reg-error-msg"></div>
+
+        <button type="submit" class="btn btn-primary btn-block btn-lg mt-3" id="btn-submit-register">
+          <span>Create Account</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- ================= FIRST-TIME WORKSPACE ONBOARDING MODAL ================= -->
+  <div class="modal-backdrop" id="onboarding-modal">
+    <div class="modal-card modal-card-sm">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <div class="brand-icon">
+            <svg width="22" height="22" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 3L27 9.35V22.65L16 29L5 22.65V9.35L16 3Z" stroke="#00FF88" stroke-width="2.2" stroke-linejoin="round"/>
+              <circle cx="16" cy="16" r="3.5" fill="#00FF88"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="modal-candidate-name">Set Up Your Workspace</h3>
+            <p class="modal-candidate-meta">Create your company workspace to manage shared candidate pools.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <form id="form-onboarding">
+          <div class="form-group">
+            <label for="onboarding-ws-name">Business / Company Name *</label>
+            <input type="text" id="onboarding-ws-name" class="form-input" placeholder="e.g. NovaTalent Enterprise" required />
+          </div>
+
+          <div class="form-group">
+            <label for="onboarding-user-role">Your Role / Job Title</label>
+            <input type="text" id="onboarding-user-role" class="form-input" placeholder="e.g. Head of Talent Acquisition" />
+          </div>
+
+          <div class="form-group">
+            <label for="onboarding-team-size">Team Size (Optional)</label>
+            <select id="onboarding-team-size" class="form-select">
+              <option value="1-5">1 - 5 Recruiters</option>
+              <option value="6-20">6 - 20 Recruiters</option>
+              <option value="20+">20+ Recruiters</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block btn-lg mt-3" id="btn-submit-onboarding">
+            <span>Continue to Dashboard &rarr;</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ================= MAIN SAAS APPLICATION SHELL ================= -->
+  <div id="app-shell" class="saas-layout" style="display: none;">
+
+    <!-- Sidebar Backdrop for Mobile -->
+    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+    <!-- Structured SaaS Sidebar -->
+    <aside class="saas-sidebar" id="saas-sidebar">
+      
+      <!-- Brand Area -->
+      <div class="sidebar-brand">
+        <div class="brand-logo-mark">
+          <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 3L27 9.35V22.65L16 29L5 22.65V9.35L16 3Z" stroke="#00FF88" stroke-width="2.2" stroke-linejoin="round"/>
+            <path d="M16 10V22" stroke="#00FF88" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M10 13L22 19" stroke="#00FF88" stroke-width="2" stroke-linecap="round"/>
+            <path d="M22 13L10 19" stroke="#00FF88" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="16" cy="16" r="3.5" fill="#00FF88"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span>SMART</span><strong>RESUME</strong>
+        </div>
+      </div>
+
+      <!-- Navigation Section -->
+      <nav class="sidebar-nav">
+        <div class="nav-section-label">MAIN NAVIGATION</div>
+
+        <button class="nav-item active" data-view="view-overview" id="nav-btn-overview">
+          <svg class="nav-item-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+            <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+            <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+            <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+          </svg>
+          <span class="nav-item-text">Overview</span>
+        </button>
+
+        <button class="nav-item" data-view="view-candidates" id="nav-btn-candidates">
+          <svg class="nav-item-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+          <span class="nav-item-text">Candidates Pool</span>
+          <span class="nav-badge" id="nav-candidate-count">0</span>
+        </button>
+
+        <button class="nav-item" data-view="view-jobs" id="nav-btn-jobs">
+          <svg class="nav-item-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="7" width="20" height="14" rx="2"></rect>
+            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+          </svg>
+          <span class="nav-item-text">Job Descriptions</span>
+          <span class="nav-badge" id="nav-jobs-count">0</span>
+        </button>
+
+        <button class="nav-item" data-view="view-results" id="nav-btn-results">
+          <svg class="nav-item-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+          <span class="nav-item-text">Screening Results</span>
+        </button>
+
+        <div class="nav-section-label nav-section-divider">ORGANIZATION</div>
+
+        <button class="nav-item" id="nav-btn-settings">
+          <svg class="nav-item-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+          <span class="nav-item-text">Workspace & Profile</span>
+        </button>
+      </nav>
+
+      <!-- Sidebar Footer: Stable User Profile Card -->
+      <div class="sidebar-user-section">
+        <div class="user-pill-card" id="sidebar-user-pill" title="View Personal Profile & Workspace Settings">
+          <div class="user-avatar" id="user-avatar-initials">U</div>
+          <div class="user-meta">
+            <div class="user-name" id="user-display-name">Recruiter User</div>
+            <div class="user-email" id="user-display-email">user@company.com</div>
+          </div>
+          <button class="btn-logout" id="btn-sidebar-logout" title="Log Out" aria-label="Log out">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+              <polyline points="16 17 21 12 16 7"></polyline>
+              <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Workspace Area -->
+    <div class="saas-main-area">
+      
+      <!-- Top Bar Header with Clear Hierarchy -->
+      <header class="saas-topbar">
+        <div class="topbar-left">
+          <button class="mobile-sidebar-toggle" id="mobile-sidebar-toggle" aria-label="Toggle navigation menu">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+          
+          <div class="header-titles-block">
+            <div class="workspace-breadcrumb-label" id="topbar-ws-breadcrumb">
+              Workspace: <strong>NovaTalent Enterprise</strong>
+            </div>
+            <h1 class="page-title" id="topbar-page-title">Overview</h1>
+            <p class="page-subtitle" id="topbar-page-subtitle">
+              Platform health, candidate pool statistics, and matching activity.
+            </p>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <div id="topbar-action-container">
+            <button class="btn btn-primary btn-md" id="topbar-cta-btn">
+              <span>+ Upload Resumes</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Scrollable Main Content Body -->
+      <main class="saas-content-body">
+
+        <!-- ================= VIEW 1: OVERVIEW DASHBOARD ================= -->
+        <section id="view-overview" class="view-panel active">
+          
+          <!-- Unified KPI Metrics Grid (4 Equal Columns) -->
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="kpi-icon-wrap">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00FF88" stroke-width="2">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+              </div>
+              <div class="kpi-content">
+                <div class="kpi-label">Total Candidates</div>
+                <div class="kpi-value" id="kpi-total-candidates">0</div>
+                <div class="kpi-trend">Candidates in workspace pool</div>
+              </div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-icon-wrap">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00FF88" stroke-width="2">
+                  <rect x="2" y="7" width="20" height="14" rx="2"></rect>
+                  <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                </svg>
+              </div>
+              <div class="kpi-content">
+                <div class="kpi-label">Active Job Roles</div>
+                <div class="kpi-value" id="kpi-active-jobs">0</div>
+                <div class="kpi-trend">Role specifications created</div>
+              </div>
+            </div>
+
+            <div class="kpi-card kpi-highlight">
+              <div class="kpi-icon-wrap">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00FF88" stroke-width="2">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+              </div>
+              <div class="kpi-content">
+                <div class="kpi-label">Strong Matches</div>
+                <div class="kpi-value neon-text" id="kpi-strong-matches">0</div>
+                <div class="kpi-trend">Calibrated score &ge; 75%</div>
+              </div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-icon-wrap">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00FF88" stroke-width="2">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                </svg>
+              </div>
+              <div class="kpi-content">
+                <div class="kpi-label">Screened Candidates</div>
+                <div class="kpi-value" id="kpi-screened-count">0</div>
+                <div class="kpi-trend">Evaluated with AI justification</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Structured Recruitment Pipeline Card (3 Equal Columns) -->
+          <div class="dashboard-card mb-section">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Recruitment Pipeline</h3>
+                <p class="card-subtitle">Follow the three-step workflow to upload resumes, configure roles, and rank candidates.</p>
+              </div>
+            </div>
+
+            <div class="workflow-steps-grid">
+              <div class="step-card" id="step-card-upload">
+                <div class="step-top-row">
+                  <div class="step-badge">1</div>
+                  <div class="step-title">Upload Candidates</div>
+                </div>
+                <div class="step-desc">Add single or bulk PDF resumes to your company workspace with automated duplicate protection.</div>
+                <div class="step-action-row">
+                  <button class="btn btn-outline btn-sm btn-block" id="btn-step-upload">Add Candidates &rarr;</button>
+                </div>
+              </div>
+
+              <div class="step-card" id="step-card-job">
+                <div class="step-top-row">
+                  <div class="step-badge">2</div>
+                  <div class="step-title">Define Job Role</div>
+                </div>
+                <div class="step-desc">Specify technical skills, experience requirements, and seniority expectations for target roles.</div>
+                <div class="step-action-row">
+                  <button class="btn btn-outline btn-sm btn-block" id="btn-step-job">Create Job &rarr;</button>
+                </div>
+              </div>
+
+              <div class="step-card" id="step-card-match">
+                <div class="step-top-row">
+                  <div class="step-badge">3</div>
+                  <div class="step-title">Analyze & Rank</div>
+                </div>
+                <div class="step-desc">Execute LLM semantic matching, review alignment breakdowns, and inspect evidence justifications.</div>
+                <div class="step-action-row">
+                  <button class="btn btn-primary btn-sm btn-block glow-btn" id="btn-step-match">Screen Pool &rarr;</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lower Dashboard Sections: 2 Equal Columns Grid -->
+          <div class="overview-dual-grid">
+            <!-- Top Matched Candidates Spotlight -->
+            <div class="dashboard-card d-flex-col">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title">Top Matched Candidates</h3>
+                  <p class="card-subtitle">Highest scoring applicants across recent screening runs</p>
+                </div>
+                <button class="btn btn-link btn-xs" id="btn-view-all-results">View All &rarr;</button>
+              </div>
+              <div class="top-matches-list flex-1" id="overview-top-matches-container">
+                <div class="empty-state-sm">
+                  <p class="text-dim">No screening evaluations run yet. Upload resumes and create a job to begin.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Workspace Activity Stream -->
+            <div class="dashboard-card d-flex-col">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title">Workspace Activity</h3>
+                  <p class="card-subtitle">Live audit stream of uploads, role creations, and screenings</p>
+                </div>
+              </div>
+              <div class="activity-feed-list flex-1" id="overview-activity-feed">
+                <!-- Live Activity Feed -->
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+
+        <!-- ================= VIEW 2: CANDIDATES MANAGEMENT ================= -->
+        <section id="view-candidates" class="view-panel">
+          
+          <div class="candidates-view-layout">
+            
+            <!-- Ingestion Column (Left) -->
+            <div class="candidate-ingestion-column">
+              <div class="dashboard-card">
+                <div class="card-header">
+                  <div>
+                    <h3 class="card-title">Add Candidate Resumes</h3>
+                    <p class="card-subtitle">Upload multiple PDFs or paste text</p>
+                  </div>
+                </div>
+
+                <!-- Tabs: Bulk PDF, Single File, Text -->
+                <div class="tab-header">
+                  <button class="tab-btn active" data-tab="tab-bulk">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                      <polyline points="17 8 12 3 7 8"></polyline>
+                      <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                    <span>Bulk Upload</span>
+                  </button>
+                  <button class="tab-btn" data-tab="tab-single">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                      <polyline points="14 2 14 8 20 8"></polyline>
+                    </svg>
+                    <span>Single File</span>
+                  </button>
+                  <button class="tab-btn" data-tab="tab-text">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <line x1="21" y1="10" x2="3" y2="10"></line>
+                      <line x1="21" y1="6" x2="3" y2="6"></line>
+                      <line x1="21" y1="14" x2="3" y2="14"></line>
+                      <line x1="21" y1="18" x2="3" y2="18"></line>
+                    </svg>
+                    <span>Paste Text</span>
+                  </button>
+                </div>
+
+                <!-- Tab: Bulk Upload -->
+                <div class="tab-pane active" id="tab-bulk">
+                  <div class="drop-zone" id="bulk-drop-zone">
+                    <input type="file" id="bulk-file-input" accept=".pdf,.txt" multiple class="file-input-hidden" />
+                    <div class="drop-icon">
+                      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#00FF88" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                      </svg>
+                    </div>
+                    <div class="drop-text">
+                      <strong>Click to browse</strong> or drag & drop multiple resumes
+                    </div>
+                    <div class="drop-hint">Select multiple PDF / TXT files at once</div>
+                  </div>
+
+                  <!-- Selected Files Queue Display -->
+                  <div id="bulk-files-queue" class="bulk-queue-container" style="display: none;">
+                    <div class="d-flex justify-between items-center mb-2">
+                      <span class="queue-heading" id="bulk-queue-count">0 files selected</span>
+                      <button class="btn btn-link btn-xs text-danger" id="btn-clear-bulk-queue">Clear Selection</button>
+                    </div>
+                    <div class="bulk-files-list" id="bulk-files-list"></div>
+
+                    <button class="btn btn-primary btn-block mt-3" id="btn-submit-bulk">
+                      <span>Upload & Process Resumes</span>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Tab: Single File Upload -->
+                <div class="tab-pane" id="tab-single">
+                  <form id="form-upload-single">
+                    <div class="drop-zone" id="single-drop-zone">
+                      <input type="file" id="single-file-input" accept=".pdf,.txt" class="file-input-hidden" />
+                      <div class="drop-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#00FF88" stroke-width="2">
+                          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                          <polyline points="14 2 14 8 20 8"></polyline>
+                        </svg>
+                      </div>
+                      <div class="drop-text" id="single-drop-text">
+                        <strong>Click to browse</strong> or drag PDF resume
+                      </div>
+                      <div class="drop-hint">Single PDF or TXT file</div>
+                    </div>
+
+                    <div class="form-group mt-3">
+                      <label for="single-candidate-name">Candidate Name (Optional Override)</label>
+                      <input type="text" id="single-candidate-name" class="form-input" placeholder="e.g. Aarav Sharma" />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block mt-3" id="btn-submit-single">
+                      <span>Parse & Add Resume</span>
+                    </button>
+                  </form>
+                </div>
+
+                <!-- Tab: Paste Text -->
+                <div class="tab-pane" id="tab-text">
+                  <form id="form-upload-text">
+                    <div class="form-group">
+                      <label for="text-candidate-name">Candidate Name (Optional)</label>
+                      <input type="text" id="text-candidate-name" class="form-input" placeholder="e.g. Priya Patel" />
+                    </div>
+
+                    <div class="form-group">
+                      <label for="resume-text-input">Resume Content *</label>
+                      <textarea id="resume-text-input" class="form-textarea" rows="6" placeholder="Paste full resume text with experience, skills, and education..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block" id="btn-submit-text">
+                      <span>Parse & Ingest Candidate</span>
+                    </button>
+                  </form>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Candidate Pool List Column (Right) -->
+            <div class="candidate-pool-column">
+              <div class="dashboard-card h-full">
+                
+                <div class="card-header">
+                  <div class="d-flex items-center gap-3">
+                    <h3 class="card-title">Candidate Pool</h3>
+                    <span class="candidate-count-badge" id="candidate-count-badge">0 Candidates</span>
+                  </div>
+                  <div class="d-flex items-center gap-2">
+                    <button class="btn btn-danger-outline btn-xs" id="btn-trigger-clear-pool" title="Clear all candidates from workspace">
+                      Clear Pool
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Search Filter Bar -->
+                <div class="candidate-search-bar">
+                  <div class="input-icon-wrap">
+                    <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="11" cy="11" r="8"></circle>
+                      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text" id="candidate-search-input" class="form-input form-input-sm" placeholder="Search by candidate name, skills, email..." />
+                  </div>
+                </div>
+
+                <!-- Candidates Pool List -->
+                <div class="candidates-pool-container" id="candidates-list-container">
+                  <div class="empty-state" id="candidates-empty-state">
+                    <div class="empty-icon">
+                      <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#334155" stroke-width="1.5">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                      </svg>
+                    </div>
+                    <div class="empty-title">No candidates in workspace</div>
+                    <p class="empty-sub">Your candidate pool is fresh. Upload PDF resumes individually or in bulk to begin.</p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- ================= VIEW 3: JOB DESCRIPTIONS ================= -->
+        <section id="view-jobs" class="view-panel">
+          
+          <div class="jobs-view-grid">
+            
+            <!-- Job Form Card -->
+            <div class="dashboard-card">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title">Job Description & Role Requirements</h3>
+                  <p class="card-subtitle">Define target skills, seniority, and qualification criteria</p>
+                </div>
+              </div>
+
+              <form id="form-job-input">
+                <div class="form-group">
+                  <label for="job-title-input">Job Title</label>
+                  <input type="text" id="job-title-input" class="form-input" placeholder="e.g. Senior Backend Engineer (Python / FastAPI)" />
+                </div>
+
+                <div class="form-group">
+                  <label for="job-desc-input">Job Description & Key Requirements *</label>
+                  <textarea id="job-desc-input" class="form-textarea" rows="9" placeholder="Paste the complete job description here, including responsibilities, required skills, preferred skills, experience requirements, and qualifications."></textarea>
+                </div>
+
+                <div class="d-flex justify-between items-center mt-4">
+                  <button type="button" class="btn btn-secondary btn-sm" id="btn-save-job">
+                    <span>Save Job Specification</span>
+                  </button>
+                  <button type="button" class="btn btn-primary btn-md glow-btn" id="btn-run-matching">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polygon points="10 8 16 12 10 16 10 8"></polygon>
+                    </svg>
+                    <span>Analyze Candidates</span>
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Saved Jobs List -->
+            <div class="dashboard-card">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title">Workspace Saved Jobs</h3>
+                  <p class="card-subtitle">Select a saved role to run candidate matching</p>
+                </div>
+              </div>
+
+              <div class="saved-jobs-list" id="saved-jobs-container">
+                <div class="empty-state-sm">
+                  <p class="text-dim">No saved job roles yet in this workspace.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- ================= VIEW 4: SCREENING RESULTS ================= -->
+        <section id="view-results" class="view-panel">
+          
+          <div class="results-header-container mb-section">
+            
+            <div class="results-top-strip">
+              <div>
+                <div class="sub-heading">LLM SEMANTIC RANKING</div>
+                <h2 class="results-title" id="results-job-title-display">Candidate Evaluation Results</h2>
+                <p class="results-subtitle" id="results-job-subtitle">Calibrated AI scoring against target job requirements</p>
+              </div>
+
+              <!-- Job Selector & Matching Trigger -->
+              <div class="d-flex items-center gap-2">
+                <select id="results-job-selector" class="form-select form-select-sm" aria-label="Select Job Role">
+                  <option value="">Select Job Role...</option>
+                </select>
+                <button class="btn btn-primary btn-sm glow-btn" id="btn-results-rerun">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="23 4 23 10 17 10"></polyline>
+                    <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                  </svg>
+                  <span>Screen Pool</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- KPI Metric Highlights -->
+            <div class="summary-metrics-wrap mt-3">
+              <div class="metric-card">
+                <div class="metric-val" id="metric-total-evaluated">0</div>
+                <div class="metric-lbl">Total Evaluated</div>
+              </div>
+              <div class="metric-card metric-strong">
+                <div class="metric-val neon-text" id="metric-shortlisted-count">0</div>
+                <div class="metric-lbl">Strong Matches</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-val" id="metric-avg-score">0%</div>
+                <div class="metric-lbl">Average Score</div>
+              </div>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div class="results-filter-bar mt-4">
+              <button class="filter-btn active" data-filter="all">All Candidates (<span id="count-filter-all">0</span>)</button>
+              <button class="filter-btn" data-filter="Strong Match">Strong Matches (<span id="count-filter-strong">0</span>)</button>
+              <button class="filter-btn" data-filter="Potential Match">Potential Matches (<span id="count-filter-potential">0</span>)</button>
+              <button class="filter-btn" data-filter="Weak Match">Weak Matches (<span id="count-filter-weak">0</span>)</button>
+            </div>
+
+          </div>
+
+          <!-- Results List Container -->
+          <div class="ranked-results-list" id="ranked-results-list">
+            <div class="empty-state" id="results-empty-state">
+              <div class="empty-icon">
+                <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#334155" stroke-width="1.5">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+              </div>
+              <div class="empty-title">No screening results yet</div>
+              <p class="empty-sub">Select a job role and click <strong>Screen Pool</strong> to rank your candidates with AI justifications.</p>
+            </div>
+          </div>
+
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+
+  <!-- ================= WORKSPACE & PROFILE SETTINGS MODAL ================= -->
+  <div class="modal-backdrop" id="settings-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <div class="brand-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
+          </div>
+          <div>
+            <h3 class="modal-candidate-name">Account & Workspace Settings</h3>
+            <p class="modal-candidate-meta">Manage personal profile, company details, and team members.</p>
+          </div>
+        </div>
+        <button class="modal-close-btn" id="settings-close-btn" aria-label="Close modal">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Settings Sub-Tabs -->
+        <div class="tab-header mb-4">
+          <button class="tab-btn active" data-settings-tab="tab-user-profile">
+            <span>Personal Profile</span>
+          </button>
+          <button class="tab-btn" data-settings-tab="tab-workspace-settings">
+            <span>Company Workspace & Team</span>
+          </button>
+        </div>
+
+        <!-- Tab 1: Personal Profile -->
+        <div class="settings-pane active" id="tab-user-profile">
+          <form id="form-user-profile">
+            <div class="d-flex items-center gap-4 mb-4">
+              <div class="user-avatar" id="modal-avatar-preview" style="width: 52px; height: 52px; font-size: 1.15rem;">U</div>
+              <div class="overflow-hidden">
+                <div class="profile-preview-name" id="modal-profile-name-preview">User Name</div>
+                <div class="profile-preview-email text-muted" id="modal-profile-email-preview">user@example.com</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="profile-fullname">Full Name</label>
+              <input type="text" id="profile-fullname" class="form-input" required />
+            </div>
+
+            <div class="form-group">
+              <label for="profile-jobtitle">Role / Job Title</label>
+              <input type="text" id="profile-jobtitle" class="form-input" placeholder="e.g. Senior Talent Recruiter" />
+            </div>
+
+            <div class="form-group">
+              <label for="profile-email-readonly">Email Address</label>
+              <input type="email" id="profile-email-readonly" class="form-input" disabled style="opacity: 0.7; cursor: not-allowed;" />
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-sm mt-2" id="btn-save-profile">
+              <span>Save Profile Changes</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Tab 2: Workspace & Team -->
+        <div class="settings-pane" id="tab-workspace-settings" style="display: none;">
+          <!-- Workspace Details Form -->
+          <form id="form-workspace-details" class="mb-4 pb-4" style="border-bottom: 1px solid var(--border-subtle);">
+            <h4 class="modal-section-title">Company Information</h4>
+            <div class="form-group">
+              <label for="settings-workspace-name">Business / Company Name</label>
+              <input type="text" id="settings-workspace-name" class="form-input" required />
+            </div>
+            <button type="submit" class="btn btn-secondary btn-sm" id="btn-save-ws-name">
+              <span>Update Business Name</span>
+            </button>
+          </form>
+
+          <!-- Team Members Section -->
+          <div>
+            <div class="d-flex justify-between items-center mb-3">
+              <div>
+                <h4 class="modal-section-title" style="margin-bottom: 2px;">Team Members</h4>
+                <p class="text-dim" style="font-size: 0.78rem;">Members share access to candidate pools, jobs, and screening results.</p>
+              </div>
+            </div>
+
+            <!-- Add Member Form -->
+            <form id="form-add-member" class="d-flex gap-2 mb-3">
+              <input type="email" id="input-member-email" class="form-input form-input-sm" placeholder="colleague@company.com" required style="flex: 1;" />
+              <select id="select-member-role" class="form-select form-select-sm" style="width: 120px;">
+                <option value="member">Member</option>
+                <option value="owner">Owner</option>
+              </select>
+              <button type="submit" class="btn btn-outline btn-sm" id="btn-invite-member">
+                <span>+ Add</span>
+              </button>
+            </form>
+
+            <!-- Members List -->
+            <div class="members-table-wrap" id="workspace-members-list">
+              <!-- Dynamically populated team members -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="settings-dismiss-btn">Close</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ================= BULK UPLOAD PROGRESS & SUMMARY MODAL ================= -->
+  <div class="modal-backdrop" id="bulk-progress-modal">
+    <div class="modal-card modal-card-sm">
+      <div class="modal-header">
+        <h3 class="modal-candidate-name" id="bulk-modal-title">Processing Resumes</h3>
+      </div>
+      <div class="modal-body">
+        <div class="bulk-progress-wrap mb-3">
+          <div class="d-flex justify-between items-center mb-1">
+            <span class="text-muted" style="font-size: 0.85rem;" id="bulk-progress-label">Uploading & parsing files...</span>
+            <span class="neon-text" style="font-weight: 700; font-size: 0.88rem;" id="bulk-progress-pct">0%</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="bulk-progress-bar" style="width: 0%;"></div>
+          </div>
+        </div>
+
+        <div class="bulk-stats-summary" id="bulk-stats-summary" style="display: none;">
+          <div class="bulk-stat-pill text-success">✓ Successfully added: <strong id="bulk-stat-success">0</strong></div>
+          <div class="bulk-stat-pill text-warning">⚠ Duplicates skipped: <strong id="bulk-stat-duplicate">0</strong></div>
+          <div class="bulk-stat-pill text-danger">✕ Failed to parse: <strong id="bulk-stat-failed">0</strong></div>
+        </div>
+
+        <div class="bulk-log-container mt-3" id="bulk-log-container"></div>
+      </div>
+      <div class="modal-footer" id="bulk-modal-footer" style="display: none;">
+        <button class="btn btn-primary btn-sm" id="btn-close-bulk-summary">View Candidate Pool</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ================= CUSTOM CONFIRMATION DIALOG MODAL ================= -->
+  <div class="modal-backdrop" id="confirm-dialog-modal">
+    <div class="modal-card modal-card-xs">
+      <div class="modal-header">
+        <div class="d-flex items-center gap-2 text-warning">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+            <line x1="12" y1="9" x2="12" y2="13"></line>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+          <h3 class="modal-candidate-name" id="confirm-title" style="font-size: 1.1rem;">Confirmation Required</h3>
+        </div>
+      </div>
+      <div class="modal-body">
+        <p id="confirm-message" class="text-muted" style="font-size: 0.88rem; line-height: 1.5;">Are you sure you want to proceed?</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" id="btn-confirm-cancel">Cancel</button>
+        <button class="btn btn-danger-outline btn-sm" id="btn-confirm-proceed">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ================= CANDIDATE DETAILS MODAL ================= -->
+  <div class="modal-backdrop" id="candidate-details-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <div class="modal-rank-badge" id="modal-rank-display">#1</div>
+          <div>
+            <h3 class="modal-candidate-name" id="modal-candidate-name">Candidate Name</h3>
+            <p class="modal-candidate-meta" id="modal-candidate-meta">email@example.com • resume.pdf</p>
+          </div>
+        </div>
+        <button class="modal-close-btn" id="modal-close-btn" aria-label="Close modal">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Score & Recommendation Hero -->
+        <div class="modal-score-banner">
+          <div class="score-dial-wrap">
+            <svg class="score-dial-svg" viewBox="0 0 100 100">
+              <circle class="score-dial-bg" cx="50" cy="50" r="42"></circle>
+              <circle class="score-dial-fill" id="modal-score-dial" cx="50" cy="50" r="42" stroke-dasharray="264" stroke-dashoffset="50"></circle>
+            </svg>
+            <div class="score-dial-text">
+              <span class="score-number" id="modal-score-number">88</span>
+              <span class="score-out-of">/ 100</span>
+            </div>
+          </div>
+
+          <div class="modal-recommendation-block">
+            <div class="rec-badge-lg" id="modal-rec-badge">Strong Match</div>
+            <p class="rec-explanation" id="modal-rec-explanation">
+              Candidate significantly aligns with primary technical responsibilities and experience criteria.
+            </p>
+          </div>
+        </div>
+
+        <!-- Skills Breakdown -->
+        <div class="modal-section">
+          <h4 class="modal-section-title">Skills Alignment Breakdown</h4>
+          <div class="skills-split-grid">
+            <div class="skills-col">
+              <div class="skills-col-title text-success">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>Matched Skills</span>
+              </div>
+              <div class="skill-chips-wrap" id="modal-matched-skills"></div>
+            </div>
+
+            <div class="skills-col">
+              <div class="skills-col-title text-warning">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="8" x2="12" y2="12"></line>
+                  <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+                <span>Missing / Unverified Skills</span>
+              </div>
+              <div class="skill-chips-wrap" id="modal-missing-skills"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Experience Assessment -->
+        <div class="modal-section">
+          <h4 class="modal-section-title">Experience Assessment</h4>
+          <div class="assessment-box" id="modal-experience-assessment">
+            Candidate work background details...
+          </div>
+        </div>
+
+        <!-- Strengths & Concerns Grid -->
+        <div class="modal-section">
+          <div class="strengths-concerns-grid">
+            <div class="sc-card sc-strengths">
+              <div class="sc-header text-success">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>Key Strengths</span>
+              </div>
+              <ul class="sc-list" id="modal-strengths-list"></ul>
+            </div>
+
+            <div class="sc-card sc-concerns">
+              <div class="sc-header text-warning">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                  <line x1="12" y1="9" x2="12" y2="13"></line>
+                  <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+                <span>Gaps & Concerns</span>
+              </div>
+              <ul class="sc-list" id="modal-concerns-list"></ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Evidence-Based Justification -->
+        <div class="modal-section">
+          <h4 class="modal-section-title">LLM Evidence-Based Justification</h4>
+          <div class="justification-box" id="modal-justification">
+            Justification text...
+          </div>
+        </div>
+
+        <!-- Structured Resume Details -->
+        <div class="modal-section">
+          <details class="parsed-details-toggle">
+            <summary>View Structured Resume Data (Parsed Experience & Education)</summary>
+            <div class="parsed-content-body" id="modal-structured-details"></div>
+          </details>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="modal-dismiss-btn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Application Script -->
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
