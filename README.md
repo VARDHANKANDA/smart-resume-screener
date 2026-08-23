@@ -37,13 +37,13 @@ Recruitment teams often struggle with high volumes of incoming resumes, manual s
 
 ```mermaid
 flowchart TD
-    subgraph Client ["Frontend Client (HTML5 / CSS3 / ES6 JS)"]
+    subgraph Client["Frontend Client (HTML5 / CSS3 / ES6 JS)"]
         UI["Interactive Dashboard UI"]
         AuthUI["Authentication & Workspace Views"]
         ModalUI["Candidate Analysis & Detail Modals"]
     end
 
-    subgraph API ["FastAPI Backend Layer (app/api)"]
+    subgraph API["FastAPI Backend Layer (app/api)"]
         AuthRouter["/auth (Register, Login, Me)"]
         WSRouter["/workspace (Setup, Members)"]
         ResumeRouter["/resumes (Single, Text, Bulk)"]
@@ -51,22 +51,22 @@ flowchart TD
         MatchRouter["/jobs/{id}/match (Screening)"]
     end
 
-    subgraph Services ["Service & Parsing Layer (app/services)"]
+    subgraph Services["Service & Parsing Layer (app/services)"]
+        AuthService["Auth Service (PBKDF2 Hashing)"]
         PDFParser["PDF Parser (pypdf stream)"]
         ResumeParser["Resume Parser (Taxonomy & Regex)"]
         JobParser["Job Parser (Requirements Analyzer)"]
         LLMMatcher["LLM Matcher & Fallback Engine"]
-        AuthService["Auth Service (PBKDF2 Hashing)"]
     end
 
-    subgraph LLM ["AI / Matching Engine"]
+    subgraph LLM["AI / Matching Engine"]
         GeminiAPI["Google Gemini REST API"]
         OpenAIAPI["OpenAI Chat Completions API"]
         DeterministicEngine["Calibrated Semantic Evaluator"]
     end
 
-    subgraph Database ["Persistence Layer (SQLite3)"]
-        DB[(smart_resume_screener.db)]
+    subgraph Database["Persistence Layer (SQLite3)"]
+        DB[("smart_resume_screener.db")]
         UsersTable["users"]
         WSTable["workspaces & members"]
         CandidatesTable["candidates"]
@@ -74,15 +74,33 @@ flowchart TD
         MatchTable["match_results"]
     end
 
-    UI -->|HTTP / JSON| API
-    API --> Services
-    ResumeRouter --> PDFParser --> ResumeParser
+    AuthUI -->|HTTP Requests| AuthRouter
+    UI -->|HTTP / JSON| ResumeRouter
+    UI -->|HTTP / JSON| JobRouter
+    UI -->|HTTP / JSON| MatchRouter
+    ModalUI -->|Fetch Details| MatchRouter
+
+    AuthRouter --> AuthService
+    ResumeRouter --> PDFParser
+    PDFParser --> ResumeParser
     JobRouter --> JobParser
     MatchRouter --> LLMMatcher
+
     LLMMatcher -->|API Key Set| GeminiAPI
     LLMMatcher -->|API Key Set| OpenAIAPI
     LLMMatcher -->|Fallback / No Key| DeterministicEngine
-    Services --> DB
+
+    AuthService --> UsersTable
+    AuthRouter --> WSTable
+    ResumeParser --> CandidatesTable
+    JobParser --> JobsTable
+    LLMMatcher --> MatchTable
+
+    UsersTable --> DB
+    WSTable --> DB
+    CandidatesTable --> DB
+    JobsTable --> DB
+    MatchTable --> DB
 ```
 
 ---
@@ -601,4 +619,4 @@ pytest -v
 
 ## 20. License
 
-This project is open-source and available under the [MIT License](LICENSE).
+This project is open-source and available under the [MIT License](LICENSE.md).
